@@ -3,7 +3,7 @@ clear all;
 close all;
 Nt_carr=256;      %子载波数=FFT点数---256
 Np_carr=Nt_carr/2-1; %实际子载波数---127
-Sig_per_carr=500; %每子载波含符号数---500
+Sig_per_carr=100; %每子载波含符号数---500
 bits_per_symbol=4;      %每符号含比特数,16QAM调制为log_2^16=4
 SNR=15; %信噪比,经实验验证信噪比越大的情况下单个子波误码越少，20的时候已经没有误码
 %==================================================
@@ -18,6 +18,7 @@ title('16QAM调制星座图');
 axis([-5,5,-5,5]);
 grid on   %显示网格线
 axis square
+saveas(gcf,'16QAM-100.jpg')
 complex_carrier_matrix1=reshape(complex_carrier_matrix',Np_carr,Sig_per_carr)';%串并变换Sig_per_carr*Nt_carr 矩阵
 carrier=[1:127];%选定载波
 %==============================================================
@@ -40,6 +41,8 @@ title('接收端16QAM【解调】前星座图');
 axis([-5,5,-5,5]);
 grid on   %显示网格线
 axis square
+saveas(gcf,'16QAMr-100.jpg')
+
 %======================16QAM解调================
 demodu_baseband_out=deqam16(received_complex_carrier_matrix1);
 
@@ -61,3 +64,6 @@ ylabel('误码个数');
 xlabel('子载波编号');
 xlim([1 Np_carr]);
 grid on;
+saveas(gcf,'BER-100.jpg')
+
+
