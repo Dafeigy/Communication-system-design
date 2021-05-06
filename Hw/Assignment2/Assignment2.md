@@ -79,7 +79,7 @@ time_wave_matrix_with_CP=[CP time_wave_matrix];
 % title('发送端第一个OFDM符号的时域波形（加CP）');
 %====================经过信道加噪声===========================
 h=zeros(1,CP_length)+0.1;
-h(1)=1;
+h(1)=1;%h(n)=[1 0.1 0.1 0.1 0.1 0.1 ]
 cp_snr=reshape(time_wave_matrix_with_CP,Nt_carr*size(time_wave_matrix_with_CP,2),1);
 noise_var = 1/(10^(snr(SNR)/10))/2;
 len = length(cp_snr);
